@@ -1,0 +1,315 @@
+/* ============================================================================
+   rtl.css — Comprehensive RTL (Right-to-Left) Styles for Arabic Support
+   Ensures text alignment, layout balance, icons, and components adapt cleanly
+   without breaking the visual composition or mirroring photos unnecessarily.
+   ========================================================================== */
+
+/* --- Font & Global Typography in RTL ------------------------------------- */
+[dir="rtl"],
+html[dir="rtl"],
+body[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+  --font-display: 'Cairo', 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body: 'Cairo', 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5 {
+  font-family: var(--font-display);
+  letter-spacing: 0;
+}
+
+[dir="rtl"] body {
+  font-family: var(--font-body);
+}
+
+/* --- Skip Link ----------------------------------------------------------- */
+[dir="rtl"] .skip-link {
+  left: auto;
+  right: 16px;
+}
+
+/* --- Primitives & Buttons ------------------------------------------------ */
+[dir="rtl"] .btn {
+  letter-spacing: 0;
+}
+
+[dir="rtl"] .btn__trailing,
+[dir="rtl"] .pillar__arrow,
+[dir="rtl"] .service-card__arrow,
+[dir="rtl"] .project__arrow,
+[dir="rtl"] .mega__link-arrow {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .btn:hover .btn__trailing {
+  transform: scaleX(-1) translateX(3px);
+}
+
+[dir="rtl"] .eyebrow__dash {
+  background: linear-gradient(270deg, var(--sess-lime), transparent);
+}
+
+[dir="rtl"] .rule {
+  transform-origin: right center;
+  background: linear-gradient(270deg, var(--sess-lime), rgba(7, 138, 165, 0.15));
+}
+
+/* --- Header & Navigation ------------------------------------------------- */
+[dir="rtl"] .nav-link::after {
+  transform-origin: right center;
+}
+
+[dir="rtl"] .nav-dropdown {
+  text-align: right;
+}
+
+[dir="rtl"] .header__actions {
+  flex-direction: row-reverse;
+}
+
+/* --- Hero Section -------------------------------------------------------- */
+[dir="rtl"] .hero__content {
+  text-align: right;
+}
+
+[dir="rtl"] .hero__lockup-rule {
+  background: linear-gradient(270deg, var(--sess-lime), var(--sess-lime-deep));
+}
+
+[dir="rtl"] .hero__cue {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+[dir="rtl"] .u-scrim-left {
+  left: auto;
+  right: 0;
+  background: linear-gradient(270deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.6) 40%, rgba(255, 255, 255, 0) 80%);
+}
+
+/* --- Parcours / Value Proposition ---------------------------------------- */
+[dir="rtl"] .parcours__badge {
+  left: auto;
+  right: 14px;
+}
+
+[dir="rtl"] .parcours__col {
+  text-align: right;
+}
+
+/* --- Services ------------------------------------------------------------ */
+[dir="rtl"] .service-card {
+  text-align: right;
+}
+
+[dir="rtl"] .service-card__num {
+  right: auto;
+  left: 1rem;
+}
+
+/* --- Projects ------------------------------------------------------------ */
+[dir="rtl"] .project__num {
+  left: auto;
+  right: 12px;
+}
+
+[dir="rtl"] .project__sector {
+  left: auto;
+  right: 12px;
+}
+
+[dir="rtl"] .project__body {
+  text-align: right;
+}
+
+[dir="rtl"] .project:hover .project__link .project__arrow {
+  transform: scaleX(-1) translateX(4px);
+}
+
+/* --- Value Added --------------------------------------------------------- */
+[dir="rtl"] .valueadded__tag {
+  left: auto;
+  right: 14px;
+}
+
+[dir="rtl"] .valueadded__text {
+  text-align: right;
+}
+
+[dir="rtl"] .valueadded__list {
+  text-align: right;
+}
+
+/* --- Staff Teaser -------------------------------------------------------- */
+[dir="rtl"] .staff__head {
+  text-align: right;
+}
+
+/* --- Contact Page & Form ------------------------------------------------- */
+[dir="rtl"] .contact-info__head {
+  text-align: right;
+}
+
+[dir="rtl"] .contact-info__label {
+  text-align: right;
+}
+
+[dir="rtl"] .contact-info__assurance {
+  padding-left: 0;
+  padding-right: 1.1rem;
+  text-align: right;
+}
+
+[dir="rtl"] .contact-info__assurance-bar {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .contact-form {
+  text-align: right;
+}
+
+[dir="rtl"] .contact-field {
+  text-align: right;
+}
+
+[dir="rtl"] .contact-field__select {
+  padding-right: 0.95rem;
+  padding-left: 2.75rem;
+}
+
+[dir="rtl"] .contact-field__chevron {
+  right: auto;
+  left: 0.95rem;
+}
+
+[dir="rtl"] .contact-form__reassure {
+  text-align: right;
+}
+
+[dir="rtl"] .contact-form--done {
+  align-items: flex-start;
+  text-align: right;
+}
+
+/* --- Mega Menu ----------------------------------------------------------- */
+[dir="rtl"] .mega__panel {
+  text-align: right;
+}
+
+[dir="rtl"] .mega__link:hover {
+  padding-left: 0;
+  padding-right: 0.4rem;
+}
+
+[dir="rtl"] .mega__link-arrow {
+  transform: scaleX(-1) translateX(6px);
+}
+
+[dir="rtl"] .mega__link:hover .mega__link-arrow {
+  transform: scaleX(-1) translateX(0);
+}
+
+/* --- Footer -------------------------------------------------------------- */
+[dir="rtl"] .footer {
+  text-align: right;
+}
+
+[dir="rtl"] .footer__accent {
+  background: linear-gradient(270deg, var(--sess-blue), var(--sess-lime-bright));
+}
+
+[dir="rtl"] .footer__links a {
+  margin-right: 0;
+}
+
+/* --- Service Hero & Bars ------------------------------------------------- */
+[dir="rtl"] .svc-hero__content {
+  text-align: right;
+}
+
+[dir="rtl"] .svc-hero__overlay {
+  background:
+    linear-gradient(
+      270deg,
+      rgba(12, 23, 40, 0.85) 0%,
+      rgba(12, 23, 40, 0.52) 30%,
+      rgba(12, 23, 40, 0.12) 56%,
+      rgba(12, 23, 40, 0.28) 100%
+    ),
+    linear-gradient(0deg, rgba(12, 23, 40, 0.88) 0%, rgba(12, 23, 40, 0.28) 24%, transparent 52%);
+}
+
+[dir="rtl"] .svc-hero__glow {
+  left: auto;
+  right: -8%;
+}
+
+[dir="rtl"] .svc-hero__rule {
+  margin: clamp(0.55rem, 1.4vw, 0.95rem) 0 clamp(0.85rem, 2vw, 1.35rem) auto;
+  background: linear-gradient(270deg, var(--sess-lime-bright), rgba(7, 138, 165, 0));
+}
+
+[dir="rtl"] .svc-hl__item::after {
+  right: auto;
+  left: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+@media (min-width: 600px) {
+  [dir="rtl"] .svc-bar__item:nth-child(2n) {
+    border-left: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+@media (min-width: 1000px) {
+  [dir="rtl"] .svc-bar__item,
+  [dir="rtl"] .svc-bar__item:nth-child(2n),
+  [dir="rtl"] .svc-bar__item:nth-child(2n + 1) {
+    border-left: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  [dir="rtl"] .svc-bar__item:first-child {
+    border-right: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  [dir="rtl"] .svc-stats__item,
+  [dir="rtl"] .svc-stats__item:nth-child(2n) {
+    border-left: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  [dir="rtl"] .svc-stats__item:first-child {
+    border-right: 0;
+  }
+}
+
+@media (min-width: 1080px) {
+  [dir="rtl"] .svc-feat__item,
+  [dir="rtl"] .svc-feat__item:nth-child(2n) {
+    border-left: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  [dir="rtl"] .svc-feat__item:first-child {
+    border-right: 0;
+  }
+}
+
+/* --- Secondary Pages (pages.css) ----------------------------------------- */
+[dir="rtl"] .page-hero__inner {
+  text-align: right;
+}
+
+[dir="rtl"] .page-note {
+  text-align: right;
+}
+
+[dir="rtl"] a.stub-card:hover .btn__trailing {
+  transform: scaleX(-1) translateX(4px);
+}

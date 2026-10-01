@@ -1,0 +1,171 @@
+/* ============================================================================
+   ui.css — shared UI primitives (buttons, eyebrow, labels, headings, rules,
+   cards, icons).
+   ========================================================================== */
+
+/* --- Icon --------------------------------------------------------------- */
+.icon {
+  display: block;
+  flex: none;
+}
+
+/* --- Buttons ------------------------------------------------------------ */
+.btn {
+  --btn-shadow: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.9rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-body);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  position: relative;
+  isolation: isolate;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease,
+    border-color 0.2s ease, color 0.2s ease;
+  box-shadow: 0 8px 24px -12px var(--btn-shadow);
+  min-height: 44px; /* tap target §7 */
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+.btn__trailing {
+  transition: transform 0.2s ease;
+}
+.btn:hover .btn__trailing {
+  transform: translateX(3px);
+}
+
+.btn--blue {
+  background: linear-gradient(180deg, var(--sess-blue-bright), var(--sess-blue-deep));
+  color: #fff;
+  --btn-shadow: rgba(7, 138, 165, 0.4);
+}
+.btn--blue:hover {
+  --btn-shadow: rgba(7, 138, 165, 0.55);
+}
+
+.btn--lime {
+  background: linear-gradient(180deg, var(--sess-lime-bright), var(--sess-lime));
+  color: #ffffff; /* white ink on cyan */
+  --btn-shadow: rgba(7, 138, 165, 0.4);
+}
+.btn--lime:hover {
+  background: linear-gradient(180deg, var(--sess-lime), var(--sess-lime-deep));
+  --btn-shadow: rgba(7, 138, 165, 0.55);
+}
+
+.btn--ghost-lime {
+  background: #FFFFFF;
+  border: 1px solid var(--sess-lime);
+  color: var(--sess-lime);
+}
+.btn--ghost-lime:hover {
+  background: #EAF6F8;
+  border-color: var(--sess-lime-deep);
+}
+
+.btn--ghost {
+  background: #FFFFFF;
+  border: 1px solid #DDE8ED;
+  color: var(--sess-text-soft);
+}
+.btn--ghost:hover {
+  border-color: rgba(7, 138, 165, 0.5);
+  color: #078AA5;
+}
+
+.btn--ghost-blue {
+  background: #FFFFFF;
+  border: 1px solid var(--sess-blue);
+  color: var(--sess-blue);
+}
+.btn--ghost-blue:hover {
+  background: #EAF6F8;
+}
+
+/* --- Eyebrow ------------------------------------------------------------ */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sess-lime);
+  font-family: var(--font-display);
+}
+.eyebrow__icon {
+  color: var(--sess-blue);
+}
+.eyebrow__dash {
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--sess-lime), transparent);
+}
+
+/* --- Section label (centred) ------------------------------------------- */
+.section-label {
+  text-align: center;
+  font-size: clamp(0.72rem, 0.85vw, 0.8125rem);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sess-lime);
+  font-family: var(--font-display);
+}
+
+/* --- Split heading ------------------------------------------------------ */
+.split-heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-section);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  color: #102A43;
+}
+.split-heading .u-lime {
+  color: var(--sess-lime);
+}
+
+/* --- Rule (animated lime underline) ------------------------------------ */
+.rule {
+  display: block;
+  width: 72px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--sess-lime), rgba(7, 138, 165, 0.15));
+  transform-origin: left center;
+}
+.rule--center {
+  margin-inline: auto;
+  background: linear-gradient(
+    90deg,
+    rgba(7, 138, 165, 0.15),
+    var(--sess-lime),
+    rgba(7, 138, 165, 0.15)
+  );
+  transform-origin: center;
+}
+
+/* --- Card --------------------------------------------------------------- */
+.card {
+  background: var(--sess-card);
+  border: 1px solid var(--sess-border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 30px rgba(20, 50, 70, 0.06);
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.card:hover {
+  border-color: var(--sess-border-hover);
+  box-shadow: 0 12px 36px rgba(20, 50, 70, 0.1);
+}

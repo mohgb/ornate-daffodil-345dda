@@ -1,0 +1,74 @@
+/* ============================================================================
+   S.E.S.S — Design tokens (single source of truth)
+   Transformed to bright white corporate theme with cyan/blue accents.
+   ========================================================================== */
+:root {
+  /* Surfaces — white and very light gray/blue backgrounds for clean, modern look */
+  --sess-black: #FFFFFF; /* page base */
+  --sess-surface: #F8FAFC; /* alternating section panel */
+  --sess-surface-2: #F1F6F8; /* raised panel */
+  --sess-card: rgba(255, 255, 255, 0.95); /* translucent card fill */
+  --sess-card-solid: #FFFFFF;
+
+  /* Accents — cyan/blue replaces lime green */
+  --sess-lime: #078AA5; /* primary accent - cyan */
+  --sess-lime-bright: #159AB3; /* bright cyan */
+  --sess-lime-deep: #056F84; /* deep cyan */
+  --sess-blue: #078AA5; /* secondary - same as primary for consistency */
+  --sess-blue-bright: #159AB3;
+  --sess-blue-deep: #056F84;
+
+  /* Type — dark navy text on light backgrounds */
+  --sess-text: #102A43; /* primary dark navy text */
+  --sess-text-soft: #526B78; /* lead paragraphs */
+  --sess-text-muted: #718590; /* card body, captions */
+
+  /* Lines — subtle light borders */
+  --sess-hairline: rgba(220, 231, 236, 0.6);
+  --sess-border: rgba(220, 231, 236, 1); /* card borders — light gray/blue */
+  --sess-border-hover: rgba(7, 138, 165, 0.3);
+
+  /* Two-tone icon accent (cyan secondary path); primary path uses currentColor */
+  --icon-accent: var(--sess-lime);
+
+  /* Fonts */
+  --font-display: 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  /* Fluid type scale */
+  --fs-hero: clamp(2.5rem, 6.2vw, 5.75rem);
+  --fs-display: clamp(2rem, 4.4vw, 4rem);
+  --fs-section: clamp(1.65rem, 2.9vw, 2.5rem);
+  --fs-lead: clamp(1rem, 1.35vw, 1.3125rem);
+  --fs-card: clamp(1rem, 1.2vw, 1.1875rem);
+  --fs-body: clamp(0.875rem, 1vw, 0.9375rem);
+  --fs-eyebrow: clamp(0.75rem, 0.9vw, 0.875rem);
+
+  /* Layout */
+  --container-max: 1440px;
+  --container-pad: 64px;
+  --radius: 8px;
+  --radius-sm: 6px;
+  --radius-lg: 12px;
+
+  /* Section rhythm */
+  --section-y: clamp(3.5rem, 8.5vw, 8.75rem);
+
+  /* Chrome / brushed-metal gradient (hero wordmark, "Construire") */
+  --chrome: linear-gradient(180deg, #102A43 0%, #1F3D56 38%, #2E5266 58%, #3D6577 100%);
+
+  /* Motion */
+  --z-header: 100;
+  --z-menu: 200;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --container-pad: 40px;
+  }
+}
+@media (max-width: 640px) {
+  :root {
+    --container-pad: 20px;
+  }
+}

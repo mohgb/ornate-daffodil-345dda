@@ -1,0 +1,245 @@
+/* ============================================================================
+   pages.css — secondary route pages: the branded page-hero, content slots,
+   list/card renderers, honest placeholder note, and the route fallback.
+   Reuses the same tokens and card treatment as the homepage.
+   ========================================================================== */
+
+/* --- Route fallback (lazy chunk load) ---------------------------------- */
+.route-fallback {
+  min-height: 60vh;
+}
+
+/* --- Page hero ---------------------------------------------------------- */
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding-block: clamp(8.5rem, 16vh, 12rem) clamp(2.75rem, 6vw, 4.5rem);
+  border-bottom: 1px solid var(--sess-hairline);
+  background:
+    radial-gradient(120% 90% at 80% 0%, rgba(7, 138, 165, 0.08), transparent 60%),
+    radial-gradient(90% 80% at 0% 100%, rgba(7, 138, 165, 0.05), transparent 62%),
+    linear-gradient(180deg, #F1F6F8 0%, var(--sess-surface) 70%);
+}
+.page-hero__glow {
+  z-index: 0;
+}
+.page-hero__glow--a {
+  width: 42vw;
+  height: 42vw;
+  max-width: 600px;
+  max-height: 600px;
+  top: -12%;
+  right: -6%;
+}
+.page-hero__glow--b {
+  width: 36vw;
+  height: 36vw;
+  max-width: 520px;
+  max-height: 520px;
+  bottom: -20%;
+  left: -8%;
+}
+.page-hero__grid {
+  opacity: 0.4;
+}
+.page-hero__inner {
+  position: relative;
+  z-index: 2;
+}
+.page-hero__eyebrow {
+  margin-bottom: 1.1rem;
+}
+.page-hero__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-display);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #102A43;
+  max-width: 20ch;
+}
+.page-hero__title-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.page-hero__title-line {
+  display: inline-block;
+  will-change: transform;
+}
+.page-hero__lead {
+  margin-top: clamp(1.1rem, 2vw, 1.6rem);
+  max-width: 56ch;
+}
+.page-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: clamp(1.75rem, 3vw, 2.25rem);
+}
+
+/* --- Page body ---------------------------------------------------------- */
+.page-body {
+  background: var(--sess-surface);
+}
+
+/* --- Card grid (services, values, roles) ------------------------------- */
+.stub-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(0.9rem, 1.6vw, 1.35rem);
+}
+.stub-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 1.5rem;
+}
+.stub-card__icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 13px;
+  color: var(--sess-blue);
+  background: rgba(30, 144, 255, 0.08);
+  border: 1px solid var(--sess-border);
+  margin-bottom: 1.1rem;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.stub-card__title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #102A43;
+  margin-bottom: 0.5rem;
+}
+.stub-card__desc {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--sess-text-muted);
+  flex: 1 1 auto;
+}
+.stub-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.15rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--sess-lime);
+}
+a.stub-card:hover {
+  transform: translateY(-5px);
+}
+a.stub-card:hover .stub-card__icon {
+  color: var(--sess-lime);
+  border-color: var(--sess-border-hover);
+}
+a.stub-card:hover .btn__trailing {
+  transform: translateX(4px);
+}
+.stub-card--role {
+  align-items: center;
+  text-align: center;
+}
+.stub-card--role .stub-card__title {
+  margin-bottom: 0;
+}
+
+@media (min-width: 620px) {
+  .stub-grid--values,
+  .stub-grid--roles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stub-grid--services {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1000px) {
+  .stub-grid--services,
+  .stub-grid--values {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .stub-grid--roles {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* --- Row list (projects) ------------------------------------------------ */
+.stub-list {
+  display: grid;
+  gap: clamp(0.9rem, 1.6vw, 1.35rem);
+}
+.stub-row {
+  display: flex;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  padding: clamp(1.35rem, 2.4vw, 2rem);
+}
+.stub-row__num {
+  flex: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1;
+  color: var(--sess-lime);
+}
+.stub-row__body {
+  min-width: 0;
+}
+.stub-row__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+}
+.stub-row__title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #102A43;
+}
+.stub-row__sector {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--sess-text-soft);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(30, 144, 255, 0.06);
+  border: 1px solid var(--sess-border);
+}
+.stub-row__sector .icon {
+  color: var(--sess-blue);
+}
+.stub-row__desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--sess-text-muted);
+}
+
+/* --- Honest placeholder note ------------------------------------------- */
+.page-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  padding: 1.25rem 1.35rem;
+  border-radius: var(--radius-lg);
+  background: rgba(7, 138, 165, 0.04);
+  border: 1px solid rgba(7, 138, 165, 0.2);
+}
+.page-note__icon {
+  flex: none;
+  color: var(--sess-lime);
+}
+.page-note p {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--sess-text-soft);
+}

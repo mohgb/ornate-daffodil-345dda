@@ -1,0 +1,584 @@
+/* ============================================================================
+   service.css — the Ingénierie & Construction service page (and future service
+   pages built on the same shell). Owns the animated cinematic hero, the
+   four-domain band beneath it, and the below-fold "approche" block. Depth is
+   built from a Ken Burns drift + pointer parallax on a single background layer
+   (see ServiceHero.jsx); this file owns the static look. Colours reference
+   tokens.css / the same rgba values used by the shared scrims — no new palette.
+   ========================================================================== */
+
+/* ========================================================================
+   1 — CINEMATIC HERO
+   ===================================================================== */
+.svc-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column; /* content (flex:1) sits above the domain band */
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Layer 1 — the photograph, over-scanned so the Ken Burns / pointer drift
+   never reveals an edge. The CSS animation runs continuously; the pointer
+   handler (JS) writes an inline transform that overrides it while the cursor
+   moves, then clears it on leave — faithful to the supplied index.html. */
+.svc-hero__bg {
+  position: absolute;
+  inset: -5%;
+  width: 110%;
+  height: 110%;
+  z-index: 0;
+  will-change: transform;
+  animation: svc-kenburns 20s ease-in-out infinite alternate;
+}
+.svc-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 48%;
+}
+/* HSE night-refinery crop — keep the engineer (centre/lower) in frame. */
+.svc-hero--hse .svc-hero__img {
+  object-position: 52% 50%;
+}
+/* Juridique "Lady Justice" crop — keep the golden scales centred; the sunset
+   window on the left sits under the headline scrim. */
+.svc-hero--juridique .svc-hero__img {
+  object-position: 50% 45%;
+}
+/* Stratégie chess crop — feature the glowing knight + the player's hand (lower
+   centre of the plate); the skyline fills the right where the aside column sits. */
+.svc-hero--strategie .svc-hero__img {
+  object-position: 50% 45%;
+}
+/* Ouverture Internationale crop — keep the glowing world-map hologram + the two
+   hands (lower centre of the plate) in frame; the skyline fills the right behind
+   the highlights column. */
+.svc-hero--international .svc-hero__img {
+  object-position: 50% 52%;
+}
+@keyframes svc-kenburns {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.045) translate3d(-0.6%, 0.4%, 0);
+  }
+  100% {
+    transform: scale(1.08) translate3d(0.8%, -0.5%, 0);
+  }
+}
+
+/* Layer 2 — cinematic scrims (left for headline legibility, bottom to seat the
+   domain band) + a soft lime accent glow. */
+.svc-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(12, 23, 40, 0.85) 0%,
+      rgba(12, 23, 40, 0.52) 30%,
+      rgba(12, 23, 40, 0.12) 56%,
+      rgba(12, 23, 40, 0.28) 100%
+    ),
+    linear-gradient(0deg, rgba(12, 23, 40, 0.88) 0%, rgba(12, 23, 40, 0.28) 24%, transparent 52%);
+}
+.svc-hero__glow {
+  position: absolute;
+  z-index: 1;
+  bottom: -12%;
+  left: -8%;
+  width: 42vw;
+  height: 42vw;
+  max-width: 640px;
+  max-height: 640px;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(140, 198, 63, 0.14), transparent 66%);
+}
+
+/* Layer 3 — content, vertically centred in the space above the band. */
+.svc-hero__content {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-block: clamp(7rem, 15vh, 9.5rem) clamp(2rem, 5vh, 3.5rem);
+}
+.svc-hero__inner {
+  max-width: 60rem; /* wide enough to keep "un avenir durable" on one line; the
+                       lead + actions carry their own narrower caps below */
+}
+.svc-hero__title {
+  font-size: var(--fs-hero);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+/* Each line rides its own clip mask so the headline rises line-by-line. Block
+   masks stack "Construire" / "un avenir durable" vertically as in the design. */
+.svc-hero__line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.svc-hero__line {
+  display: inline-block;
+  will-change: transform;
+}
+/* HSE opener extras — a large chrome acronym "wordmark", a short lime rule,
+   then the smaller two-line tagline. Sizes are set independently of --fs-hero
+   so the acronym can dominate without dragging the tagline up with it. */
+.svc-hero__eyebrow {
+  margin-bottom: clamp(0.9rem, 2vw, 1.35rem);
+}
+.svc-hero__line--wordmark {
+  font-size: clamp(3.25rem, 8vw, 7rem);
+  line-height: 0.98;
+  letter-spacing: 0.02em; /* an acronym reads better slightly open */
+}
+.svc-hero__rule {
+  display: block;
+  width: clamp(56px, 8vw, 84px);
+  height: 3px;
+  margin: clamp(0.55rem, 1.4vw, 0.95rem) 0 clamp(0.85rem, 2vw, 1.35rem);
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--sess-lime-bright), rgba(7, 138, 165, 0));
+}
+.svc-hero__line--sub {
+  font-size: clamp(1.7rem, 4vw, 3.15rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+.svc-hero__line--plain {
+  color: var(--sess-text);
+}
+.svc-hero__lead {
+  margin-top: clamp(1.1rem, 2.2vw, 1.7rem);
+  max-width: 42ch;
+  font-size: var(--fs-lead);
+  line-height: 1.7;
+  color: var(--sess-text-soft);
+}
+.svc-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: clamp(1.6rem, 3vw, 2.3rem);
+}
+
+/* Stratégie split — the headline block + a right-hand domain column. Stacked on
+   smaller widths (aside falls under the headline), side-by-side from 992px. The
+   aside is vertically centred against the taller headline, as in design 05. */
+.svc-hero__split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr); /* min 0 so long copy can't blow the track past the container (grid `1fr` = minmax(auto,1fr) would size to the widest child's max-content) */
+  gap: clamp(1.75rem, 4vw, 3.25rem);
+  align-items: center;
+}
+@media (min-width: 992px) {
+  .svc-hero__split {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 22rem);
+  }
+}
+.svc-aside {
+  display: grid;
+  gap: clamp(1rem, 2.1vw, 1.45rem);
+}
+.svc-aside__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem;
+  align-items: start;
+}
+.svc-aside__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.7rem;
+  height: 2.7rem;
+  border-radius: 0.85rem;
+  color: var(--sess-blue);
+  background: rgba(30, 144, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.svc-aside__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+.svc-aside__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  line-height: 1.2;
+  color: var(--sess-text);
+}
+.svc-aside__desc {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--sess-text-muted);
+}
+
+/* Ouverture Internationale highlights — the hero's right-hand column as four
+   bordered cards with a lime right-edge accent (design 06). Shares the
+   .svc-hero__split layout with Stratégie; only the card styling differs. */
+.svc-hl {
+  display: grid;
+  gap: clamp(0.7rem, 1.6vw, 1rem);
+}
+.svc-hl__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem;
+  align-items: center;
+  padding: clamp(0.85rem, 1.6vw, 1.05rem) clamp(1rem, 1.8vw, 1.25rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.9rem;
+  background: rgba(12, 23, 40, 0.38);
+  overflow: hidden;
+}
+/* the lime right-edge accent bar */
+.svc-hl__item::after {
+  content: '';
+  position: absolute;
+  top: 16%;
+  bottom: 16%;
+  right: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+  background: linear-gradient(180deg, var(--sess-lime-bright), rgba(7, 138, 165, 0.25));
+}
+.svc-hl__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.7rem;
+  height: 2.7rem;
+  border-radius: 0.85rem;
+  color: var(--sess-blue);
+  background: rgba(30, 144, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.svc-hl__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+.svc-hl__value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+  line-height: 1.1;
+  color: var(--sess-lime);
+}
+.svc-hl__label {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--sess-text-muted);
+}
+
+/* ========================================================================
+   2 — DOMAIN BAND (four columns, one divided strip at the hero foot)
+   ===================================================================== */
+.svc-bar {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(12, 23, 40, 0.60), rgba(10, 18, 30, 0.82));
+}
+.svc-bar__grid {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile: stacked rows */
+}
+.svc-bar__item {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: clamp(1rem, 1.8vw, 1.45rem) clamp(0.5rem, 2vw, 1.5rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background 0.25s ease;
+}
+.svc-bar__item:first-child {
+  border-top: 0;
+}
+.svc-bar__item:hover {
+  background: rgba(30, 144, 255, 0.06);
+}
+.svc-bar__item:hover .svc-bar__title {
+  color: #fff;
+}
+.svc-bar__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  color: var(--sess-blue);
+}
+.svc-bar__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+.svc-bar__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(0.98rem, 1.4vw, 1.12rem);
+  color: var(--sess-text);
+  transition: color 0.25s ease;
+}
+.svc-bar__desc {
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--sess-text-muted);
+}
+
+/* Two columns from 600px, four across from 1000px — dividers follow the layout
+   (top borders while stacked/2-up, left borders once in a single row). */
+@media (min-width: 600px) {
+  .svc-bar__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .svc-bar__item {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .svc-bar__item:nth-child(-n + 2) {
+    border-top: 0;
+  }
+  .svc-bar__item:nth-child(2n) {
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .svc-bar__item:nth-child(2n + 1) {
+    border-left: 0;
+  }
+}
+@media (min-width: 1000px) {
+  .svc-bar__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .svc-bar__item,
+  .svc-bar__item:nth-child(2n),
+  .svc-bar__item:nth-child(2n + 1) {
+    border-top: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .svc-bar__item:first-child {
+    border-left: 0;
+  }
+}
+
+/* ========================================================================
+   2b — METRICS STRIP (Stratégie hero foot: four stats, one divided band)
+   ===================================================================== */
+.svc-stats {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(12, 23, 40, 0.60), rgba(10, 18, 30, 0.82));
+}
+.svc-stats__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* mobile: 2 x 2 */
+}
+.svc-stats__item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: clamp(1rem, 1.8vw, 1.45rem) clamp(0.75rem, 2vw, 1.5rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.svc-stats__item:nth-child(-n + 2) {
+  border-top: 0;
+}
+.svc-stats__item:nth-child(2n) {
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+.svc-stats__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  color: var(--sess-blue);
+}
+.svc-stats__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+.svc-stats__value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  line-height: 1;
+  color: var(--sess-lime);
+}
+.svc-stats__label {
+  font-size: 0.82rem;
+  line-height: 1.3;
+  color: var(--sess-text-muted);
+}
+/* Four across once there is room — dividers become left borders on one row. */
+@media (min-width: 768px) {
+  .svc-stats__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .svc-stats__item,
+  .svc-stats__item:nth-child(2n) {
+    border-top: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .svc-stats__item:first-child {
+    border-left: 0;
+  }
+}
+
+/* ========================================================================
+   2c — FEATURE PANEL (Ouverture Internationale hero foot: five features held
+   in one rounded, inset, divided band — distinct from the full-bleed bars)
+   ===================================================================== */
+.svc-feat {
+  position: relative;
+  z-index: 2;
+  padding-bottom: clamp(1.5rem, 3.5vh, 2.75rem);
+}
+.svc-feat__panel {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile: stacked rows */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(6, 11, 18, 0.62), rgba(5, 9, 15, 0.78));
+  overflow: hidden;
+}
+.svc-feat__item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: clamp(0.95rem, 1.6vw, 1.3rem) clamp(1rem, 1.8vw, 1.4rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.svc-feat__item:first-child {
+  border-top: 0;
+}
+.svc-feat__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  color: var(--sess-blue);
+}
+.svc-feat__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+.svc-feat__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(0.98rem, 1.3vw, 1.08rem);
+  line-height: 1.2;
+  color: var(--sess-text);
+}
+.svc-feat__desc {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--sess-text-muted);
+}
+/* Two columns from 640px, five across from 1080px — dividers follow the layout
+   (top borders while stacked/2-up, left borders once in a single row). */
+@media (min-width: 640px) {
+  .svc-feat__panel {
+    grid-template-columns: 1fr 1fr;
+  }
+  .svc-feat__item:nth-child(-n + 2) {
+    border-top: 0;
+  }
+  .svc-feat__item:nth-child(2n) {
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+@media (min-width: 1080px) {
+  .svc-feat__panel {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .svc-feat__item,
+  .svc-feat__item:nth-child(2n) {
+    border-top: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .svc-feat__item:first-child {
+    border-left: 0;
+  }
+}
+
+/* ========================================================================
+   3 — BELOW-FOLD "APPROCHE" (reuses the brand's verbatim parcours content)
+   ===================================================================== */
+.svc-approach__head {
+  margin-bottom: 0.9rem;
+}
+.svc-approach__title-mask {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.svc-approach__title-line {
+  display: inline-block;
+}
+.svc-approach__lead {
+  margin-top: 1rem;
+}
+.svc-approach__grid {
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+/* ========================================================================
+   4 — RESPONSIVE / REDUCED MOTION
+   ===================================================================== */
+@media (max-width: 640px) {
+  /* Keep the worker + sunset in frame on tall, narrow crops. */
+  .svc-hero__img {
+    object-position: 42% 46%;
+  }
+  .svc-hero--hse .svc-hero__img {
+    object-position: 60% 50%;
+  }
+  /* Lady Justice — a narrow, tall crop keeps the statue + golden scales centred. */
+  .svc-hero--juridique .svc-hero__img {
+    object-position: 54% 44%;
+  }
+  /* Stratégie — a narrow, tall crop keeps the glowing knight + hand centred. */
+  .svc-hero--strategie .svc-hero__img {
+    object-position: 50% 44%;
+  }
+  /* International — a narrow, tall crop keeps the world-map hologram + hands centred. */
+  .svc-hero--international .svc-hero__img {
+    object-position: 50% 50%;
+  }
+  /* International's headline copy and primary CTA label are the longest of the
+     service set. On the narrowest widths, ease the title down and let the CTA
+     label wrap so neither is clipped against the ~350px mobile content column. */
+  .svc-hero--international .svc-hero__title {
+    font-size: clamp(1.85rem, 9.2vw, 2.5rem);
+  }
+  .svc-hero--international .svc-hero__actions .btn {
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-hero__bg {
+    animation: none;
+  }
+}

@@ -1,0 +1,120 @@
+/* ============================================================================
+   S.E.S.S — Utilities & shared primitives
+   ========================================================================== */
+
+/* --- Layout ------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+}
+.section--surface {
+  background: var(--sess-surface);
+}
+.section--tight {
+  padding-block: clamp(2.5rem, 5vw, 5rem);
+}
+
+/* --- Film grain (§6.1 layer 8) — pure CSS turbulence, no asset ---------- */
+.u-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+.grain-fixed {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* --- Scrims ------------------------------------------------------------- */
+.u-scrim-left {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    var(--sess-black) 0%,
+    rgba(255, 255, 255, 0.9) 24%,
+    rgba(255, 255, 255, 0.5) 46%,
+    rgba(255, 255, 255, 0.12) 70%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+}
+.u-scrim-bottom {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    0deg,
+    var(--sess-black) 0%,
+    rgba(255, 255, 255, 0.45) 22%,
+    transparent 55%
+  );
+}
+
+/* --- Text treatments ---------------------------------------------------- */
+.u-chrome {
+  background: var(--chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.u-lime {
+  color: var(--sess-lime);
+}
+.u-blue {
+  color: var(--sess-blue);
+}
+
+/* Radial accent glow used behind stat/value panels */
+.u-glow-blue {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(7, 138, 165, 0.1), transparent 66%);
+  filter: blur(30px);
+  pointer-events: none;
+}
+.u-glow-lime {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(7, 138, 165, 0.08), transparent 66%);
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+/* --- Accessibility helper ---------------------------------------------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Reveal baseline (JS adds motion; this holds pre-animation state) --- */
+[data-reveal] {
+  will-change: transform, opacity;
+}
